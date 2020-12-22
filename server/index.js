@@ -22,7 +22,7 @@ app.use('/secretari@',require('./routes/secretaria.routes'));
 app.use('/usuario',require('./routes/usuario.routes'));
 app.use('/formato/1',require('./routes/formato_1.routes'));
 app.use('/formato/2',require('./routes/formato_2.routes'));
-//app.use('/formato/5',require('./routes/formato_5.routes'));
+app.use('/formato/5',require('./routes/formato_5.routes'));
 
 //Starting the server
 app.listen(app.get('port'), ()=> {

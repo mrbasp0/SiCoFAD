@@ -5,7 +5,7 @@ const TipoSchema = new Schema({
     teoria: { type: Boolean },
     practica: { type: Boolean },
     laboratorio: { type: Boolean }
-});
+}, { _id : false });
 
 const DelCursoSchema = new Schema({
     0: { type: Number, required: true },
@@ -19,7 +19,7 @@ const DelCursoSchema = new Schema({
     8: { type: Number, required: true },
     9: { type: Number, required: true },
     10: { type: Number, required: true }
-});
+}, { _id : false });
 
 const ObsSchema = new Schema({
     0: { type: String, required: true },
@@ -32,7 +32,7 @@ const ObsSchema = new Schema({
     7: { type: String, required: true },
     8: { type: String, required: true },
     9: { type: String, required: true }
-});
+}, { _id : false });
 
 const Form5Schema = new Schema({
     cod_curso: { type: Number, required: true },
@@ -41,7 +41,7 @@ const Form5Schema = new Schema({
     tipo: { type: TipoSchema },
     nom_docente: { type: String, required: true },
     email_docente: { type: String, required: true },
-    telef_docente: { type: Number, required: true },
+    telef_docente: { type: Number },
     del_curso: { type: DelCursoSchema },
     observaciones: { type: ObsSchema },
     fecha: { type: Date, required: true }
