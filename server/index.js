@@ -10,7 +10,7 @@ const { mongoose } = require('./database');
 app.set('port', process.env.PORT || 3000);
 
 // Middlewares
-//app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(express.json());
 //app.use(cors({origin: 'http://localhost:4200'}));//esto es para qeu se conecte con el frontend
 
