@@ -11,11 +11,11 @@ app.set('port', process.env.PORT || 3000);
 
 // Middlewares
 //app.use(morgan('dev'));
-//app.use(express.json());
-//app.use(cors({origin: 'http://localhost:4200'}));//esto es para qeu se conecte co nel frontend
+app.use(express.json());
+//app.use(cors({origin: 'http://localhost:4200'}));//esto es para qeu se conecte con el frontend
 
 // Routes
-app.use('/api/curso',require('./routes/curso.routes'));
+app.use('/curso',require('./routes/curso.routes'));
 //app.use('/api/director',require('./routes/director.routes'));
 
 //Starting the server
