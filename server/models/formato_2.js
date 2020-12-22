@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const PSchema = new Schema({
-    nombre: { type: String, required: true },
-    codigo: { type: Number, required: true },
-    email: { type: String, required: true },
-    telefono: { type: Number, required: true },
-    celular: { type: Number, required: true },
-    direccion: { type: String, required: true },
-});
+    p_nombre: { type: String, required: true },
+    p_codigo: { type: Number, required: true },
+    p_email: { type: String, required: true },
+    p_telefono: { type: Number },
+    p_celular: { type: Number, required: true },
+    p_direccion: { type: String },
+}, { _id : false });
 
 const Form2Schema = new Schema({
     cod_curso: { type: Number, required: true },

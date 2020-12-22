@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const AlumnoSchema = new Schema({
-    nombre: { type: String, required: true },
-    codigo: { type: Number, required: true },
-    correo: { type: String, required: true }
-});
+    a_nombre: { type: String, required: true },
+    a_codigo: { type: Number, required: true },
+    a_correo: { type: String, required: true }
+}, { _id : false });
 
 const Form1Schema = new Schema({
-    cod_curso: { type: Number, required: true },
+    cod_curso: { type: String, required: true },
     num_grupo: { type: Number, required: true },
     nom_curso: { type: String, required: true },    
     nom_docente: { type: String, required: true },

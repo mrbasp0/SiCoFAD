@@ -19,7 +19,7 @@ directorCtrl.createDirector = async (req, res) => {
 }
 
 directorCtrl.getDirector = async (req, res) => {
-    const direct = await direct.findById(req.params.id);
+    const direct = await director.findById(req.params.id);
     res.json(direct);
 }
 

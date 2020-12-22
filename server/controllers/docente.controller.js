@@ -7,30 +7,30 @@ docenteCtrl.getDocentes = async (req, res) => {
 }
 
 docenteCtrl.createDocente = async (req, res) => {
-    const direct = new docente({
+    const docent = new docente({
         nombre: req.body.nombre,
         codigo: req.body.codigo,
         carga_academica: req.body.carga_academica
     });
-    await direct.save();
+    await docent.save();
     res.json({
         'status': 'Docente Guardado'
     });
 }
 
 docenteCtrl.getDocente = async (req, res) => {
-    const direct = await direct.findById(req.params.id);
-    res.json(direct);
+    const docent = await docente.findById(req.params.id);
+    res.json(docent);
 }
 
 docenteCtrl.editDocente = async (req, res) => {
     const { id } = req.params;
-    const ndirect = {
+    const ndocent = {
         nombre: req.body.nombre,
         codigo: req.body.codigo,
         carga_academica: req.body.carga_academica
     };
-    await docente.findByIdAndUpdate(id, {$set: ndirect}, {new: true});
+    await docente.findByIdAndUpdate(id, {$set: ndocent}, {new: true});
     res.json({status: 'Docente Actualizado'});
 }
 
