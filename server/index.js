@@ -17,8 +17,9 @@ app.use(express.json());
 // Routes
 app.use('/curso',require('./routes/curso.routes'));
 app.use('/director',require('./routes/director.routes'));
+app.use('/docente',require('./routes/docente.routes'));
 
 //Starting the server
 app.listen(app.get('port'), ()=> {
-    console.log('Server on port', app.get('port'));
+    console.log('Server en puerto', app.get('port'));
 });
