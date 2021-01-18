@@ -1,0 +1,183 @@
+<div class="contaniner">
+  <div class="card-content">
+    <h1>Docentes</h1>
+  </div>
+  <div class="col-md-8">
+    <table class="table table-striped ">
+      <thead>
+        <th>Codigo</th>
+        <th>Nombre</th>
+        <th>Opcion</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let docente of docenteService.docentes">
+          <td>{{ docente.codigo }}</td>
+          <td>{{ docente.nombre }}</td>
+          <td>
+            <a (click)="editDocente(docente)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="material-icons">edit</i>
+            </a>
+            <a (click)="deleteDocente(docente._id)">
+              <i class="material-icons">delete</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar Docente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+          <form #DocenteForm="ngForm" (ngSubmit)="addDocente(DocenteForm)">
+            <!-- THE Id's Employee -->
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="docenteService.selectedDocente._id">
+
+            <div class="row">
+              <div class="form-group col">
+                <label>Nombre</label>
+                <input type="text" name="nombre" #name="ngModel" [(ngModel)]="docenteService.selectedDocente.nombre"
+                  placeholder="Nombre" class="form-control">
+              </div>
+
+              <div class="form-group col">
+                <div class="input-field col-s12">
+                  <label>Codigo</label>
+                  <input type="text" name="codigo" #name="ngModel" [(ngModel)]="docenteService.selectedDocente.codigo"
+                    placeholder="Enter your Position" class="form-control">
+                </div>
+              </div>
+            </div>
+            <br>
+            <div *ngFor="let curs of docenteService.selectedDocente.carga_academica; let i = index">
+
+              <h6>Curso</h6>
+              <div class="row">
+                <label class="col-md-2" [attr.for]="'nombre' + i">Nombre</label>
+                <div class="form-group col">
+                  <input type="text" name="c_nombre{{i}}" [attr.for]="'nombre' + i" #name="ngModel" id="c_nombre{{i}}"
+                    [(ngModel)]="curs.c_nombre" class="form-control">
+                </div>
+                <label class="col-md-2" [attr.for]="'codigo' + i">Codigo</label>
+                <div class="form-group col">
+                  <input type="number" name="c_codigo{{i}}" [attr.for]="'codigo' + i" #name="ngModel" id="c_codigo{{i}}"
+                    [(ngModel)]="curs.c_codigo" class="form-control">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <label class="col-md-2" [attr.for]="'grupo' + i">Grupo</label>
+                <div class="form-group col">
+                  <input type="text" name="c_grupo{{i}}" [attr.for]="'grupo' + i" #name="ngModel" id="c_grupo{{i}}"
+                    [(ngModel)]="curs.c_grupo" class="form-control">
+                </div>
+                <label class="col-md-2" [attr.for]="'plan' + i">Plan</label>
+                <div class="form-group col">
+                  <input type="text" name="c_plan{{i}}" [attr.for]="'plan' + i" #name="ngModel" id="c_plan{{i}}"
+                    [(ngModel)]="curs.c_plan" class="form-control">
+                </div>
+              </div>
+              <br>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="btn btn-secondary">Guardar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Fin Modal -->
+
+  <h1>Registro de Profesores</h1>
+  <form ngNoForm [formGroup]="registroForm">
+    <div class="row">
+      <div class="form-group col-md-5">
+        <input type="text" class="form-control" formControlName="codigo" placeholder="Codigo">
+      </div>
+      <div class="form-group col-md-5">
+        <input type="text" class="form-control" formControlName="nombre" placeholder="Nombres y Apellidos">
+      </div>
+    </div>
+
+    <div class="contaniner">
+      <h1>Cursos Disponibles</h1>
+    </div>
+
+    <div class="col-md-8">
+      <table class="table table-striped ">
+        <thead>
+          <th>Codigo</th>
+          <th>Curso</th>
+          <th>Grupo</th>
+          <th>Plan</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let curso of docenteService.cursos">
+            <td>{{ curso.codigo }}</td>
+            <td>{{ curso.nombre }}</td>
+            <td>{{ curso.grupo }}</td>
+            <td>{{ curso.plan}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-dark" (click)="agregarCarga()">Agregar Carga Academica</button>
+    </div>
+    <br>
+
+    <div formArrayName="carga_academica" *ngFor="let carga of carga_academica.controls; let i = index">
+      <div [formGroupName]="i">
+        <br>
+        <div class="form-group row">
+
+          <label class="col-md-1" [attr.for]="'nombre' + i">Curso</label>
+          <div class="col-md-3">
+            <input type="text" [attr.id]="'nombre' + i" class="form-control" formControlName="c_nombre">
+          </div>
+
+          <label class="col-md-1" [attr.for]="'codigo' + i">Codigo</label>
+          <div class="col-md-3">
+            <input type="text" [attr.id]="'codigo' + i" class="form-control" formControlName="c_codigo">
+          </div>
+
+          <label class="col-md-1" [attr.for]="'grupo' + i">Grupo</label>
+          <div class="col-md-1">
+            <input type="number" [attr.id]="'grupo' + i" class="form-control" formControlName="c_grupo">
+          </div>
+
+          <label class="col-md-1" [attr.for]="'plan' + i">Plan</label>
+          <div class="col-md-1">
+            <input type="text" [attr.id]="'plan' + i" class="form-control" formControlName="c_plan">
+          </div>
+
+          <div class="col-md-2">
+            <button class="btn btn-dark" (click)="removerCarga(i)">Remover</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button class="btn btn-dark me-md-2" type="button" (click)="addDocente(registroForm)">Agregar</button>
+      <button class="btn btn-dark" type="button" (click)="refrescar()">Refrescar</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,19 @@
+<div class="header-container">
+    <div class="logo-container">
+      <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+        <nb-icon icon="menu-2-outline"></nb-icon>
+      </a>
+      <a class="logo" href="#" (click)="navigateHome()">SICOFAD-<span>admin</span></a>
+    </div>
+
+  </div>
+  
+  <div class="header-container">
+    <nb-actions size="small">
+  
+      <nb-action class="user-action" >
+        <nb-user [name]="usuario?.name">
+        </nb-user>
+      </nb-action>
+    </nb-actions>
+  </div>
