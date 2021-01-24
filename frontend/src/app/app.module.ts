@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbIconModule, NbMenuModule, NbSidebarModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbIconModule, NbMenuModule, NbSidebarModule, NbButtonModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
 import {SifoCadAuthModule} from './auth/auth.module';
@@ -33,6 +33,7 @@ const formSetting: any = {
     NbLayoutModule,
     NbEvaIconsModule,
     NbIconModule,
+    NbButtonModule,
     AppRoutingModule,
     HttpClientModule,
     SifoCadAuthModule,

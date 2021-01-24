@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms'
 import { Docente } from '../../../models/docente'
 import { Curso } from '../../../models/curso'
 import { FormBuilder, FormGroup, FormArray, Validator } from '@angular/forms';
+import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbButtonModule } from '@nebular/theme';
 
 declare var M: any;
 const buton = document.getElementById('buton')
@@ -102,7 +103,7 @@ export class DocenteComponent implements OnInit {
           this.refrescar();
         })
     }
-    //console.log(form.value);
+    console.log(form.value);
   }
 
 
