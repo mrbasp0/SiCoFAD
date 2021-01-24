@@ -7,20 +7,104 @@
 
             <nb-tab tabTitle="Nuevo Formato 1" tabIcon="file-add-outline" responsive>
                 <nb-card>
-                    <nb-card-header>RESGISTRO</nb-card-header>
-                    <nb-card-body class="example-items-rows">
-                        <input type="text" nbInput placeholder="Codigo del Curso">
-                        <input type="text" nbInput placeholder="Nombre del Curso">
-                        <input type="number" nbInput placeholder="Grupo o Sección">
-                        <input type="text" nbInput placeholder="Docente">
+                    <nb-card-header>
+                        <h1>Registro de Profesores</h1>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <form ngNoForm [formGroup]="registroForm">
+
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <input type="text" class="form-control" formControlName="cod_curso"
+                                        placeholder="Codigo del Curso">
+                                </div>
+                                <br>
+                                <br>
+                                <div class="form-group col-md-5">
+                                    <input type="text" class="form-control" formControlName="num_grupo"
+                                        placeholder="Grupo o Sección del Curso">
+                                </div>
+                                <br>
+                                <br>
+                                <div class="form-group col-md-5">
+                                    <input type="text" class="form-control" formControlName="nom_curso"
+                                        placeholder="Nombre del Curso">
+                                </div>
+                                <br>
+                                <br>
+                                <div class="form-group col-md-5">
+                                    <input type="text" class="form-control" formControlName="nom_docente"
+                                        placeholder="Nombre del Docente">
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <nb-card>
+                                <nb-card-header>Alumnos</nb-card-header>
+                                <nb-card-body>
+                                    <button class="btn btn-outline-info" (click)="agregarAlumnos()">Agregar Alumnos</button>
+                                </nb-card-body>
+                            </nb-card>
+
+                            <div formArrayName="alumnos"
+                                *ngFor="let alumno of alumnos.controls; let i = index">
+                                <div [formGroupName]="i">
+                                    <br>
+                                    <div class="form-group row">
+                                        <nb-card>
+                                            <nb-card-body>
+
+                                                <nb-card>
+                                                    <nb-card-header>
+                                                        <label class="col-md-1" [attr.for]="'nombre' + i">Nombre</label>
+                                                    </nb-card-header>
+                                                    <nb-card-body>
+                                                        <input type="text" [attr.id]="'nombre' + i" class="form-control"
+                                                            formControlName="a_nombre" placeholder="Nombre del Alumno">
+                                                    </nb-card-body>
+                                                </nb-card>
+
+                                                <nb-card>
+                                                    <nb-card-header>
+                                                        <label class="col-md-1" [attr.for]="'codigo' + i">Codigo</label>
+                                                    </nb-card-header>
+                                                    <nb-card-body>
+                                                        <input type="text" [attr.id]="'codigo' + i" class="form-control"
+                                                            formControlName="a_codigo" placeholder="Codigo del Alumno">
+                                                    </nb-card-body>
+                                                </nb-card>
+                                                <nb-card>
+
+                                                    <nb-card-header>
+                                                        <label class="col-md-1" [attr.for]="'Correo' + i">Correo</label>
+                                                    </nb-card-header>
+                                                    <nb-card-body>
+                                                        <input type="email" [attr.id]="'Correo' + i"
+                                                            class="form-control" formControlName="a_correo"
+                                                            placeholder="Correo">
+                                                    </nb-card-body>
+                                                </nb-card>
+
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-dark"
+                                                        (click)="removerCarga(i)">Remover</button>
+                                                </div>
+
+                                            </nb-card-body>
+                                        </nb-card>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button class="btn btn-outline-success me-md-2" type="button"
+                                    (click)="addFormato(registroForm)">Agregar</button>
+                                <button class="btn btn-outline-warning" type="button"
+                                    (click)="refrescar()">Refrescar</button>
+                            </div>
+                        </form>
                     </nb-card-body>
                 </nb-card>
-                <nb-card>
-                    <nb-card-body class="example-items-rows">
-                      <input type="text" nbInput placeholder="Text field">
-                      <input type="text" nbInput placeholder="Disabled Text field" disabled>
-                    </nb-card-body>
-                  </nb-card>
             </nb-tab>
         </nb-tabset>
 
