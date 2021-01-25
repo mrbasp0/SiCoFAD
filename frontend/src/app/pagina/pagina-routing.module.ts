@@ -5,6 +5,7 @@ import {NbAuthComponent} from '@nebular/auth';
 import { InicioComponent } from '../pagina/inicio/inicio.component';
 import { DelegadosComponent } from './formatos/delegados/delegados.component';
 import { SilabosComponent } from './formatos/silabos/silabos.component';
+import { CursosComponent } from './cursos/cursos.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
           },
          
         ]
+      },
+      {
+        path: 'Cursos',
+        component: CursosComponent
       }
       
     ]

@@ -156,10 +156,13 @@
 
               <div class="row">
                 <div class="form-group col-md-5">
-                  <input type="text" class="form-control" formControlName="codigo" placeholder="Codigo">
+                  <input type="text" class="form-control" formControlName="codigo" nbInput fullWidth
+                    placeholder="Codigo">
                 </div>
+                <br>
                 <div class="form-group col-md-5">
-                  <input type="text" class="form-control" formControlName="nombre" placeholder="Nombres y Apellidos">
+                  <input type="text" class="form-control" formControlName="nombre" nbInput fullWidth
+                    placeholder="Nombres y Apellidos">
                 </div>
               </div>
               <br>
@@ -168,66 +171,53 @@
                 <nb-card-header>Carga Academica</nb-card-header>
                 <nb-card-body>
                   <button class="btn btn-outline-info" (click)="agregarCarga()">Agregar Carga Academica</button>
+
+
+                  <div formArrayName="carga_academica" *ngFor="let carga of carga_academica.controls; let i = index">
+                    <div [formGroupName]="i">
+                      <br>
+                      <div class="form-group row">
+                        <nb-card>
+                          <nb-card-header>Curso N° {{i+1}}</nb-card-header>
+                          <nb-card-body>
+                            <div class="row">
+                              <div class="form-group col-md-5">
+                                <label class="col-md-1" [attr.for]="'nombre' + i">Curso</label>
+                                <input type="text" [attr.id]="'nombre' + i" class="form-control"
+                                  formControlName="c_nombre" nbInput fullWidth placeholder="Nombre del Curso">
+                              </div>
+                              <br>
+                              <div class="form-group col-md-5">
+                                <label class="col-md-1" [attr.for]="'codigo' + i">Codigo</label>
+                                <input type="text" [attr.id]="'codigo' + i" class="form-control"
+                                  formControlName="c_codigo" nbInput fullWidth placeholder="Codigo del Curso">
+                              </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                              <div class="form-group col-md-5">
+                                <label class="col-md-1" [attr.for]="'grupo' + i">Grupo</label>
+                                <input type="number" [attr.id]="'grupo' + i" class="form-control"
+                                  formControlName="c_grupo" nbInput fullWidth placeholder="Grupo o Seccion">
+                              </div>
+                              <br>
+                              <div class="form-group col-md-5">
+                                <label class="col-md-1" [attr.for]="'plan' + i">Plan</label>
+                                <input type="text" [attr.id]="'plan' + i" class="form-control" formControlName="c_plan"
+                                  nbInput fullWidth placeholder="Plan de Estudios">
+                              </div>
+                              <br>
+                              <div class="col-md-2">
+                                <button class="btn btn-dark" (click)="removerCarga(i)">Remover</button>
+                              </div>
+                            </div>
+                          </nb-card-body>
+                        </nb-card>
+                      </div>
+                    </div>
+                  </div>
                 </nb-card-body>
               </nb-card>
-
-
-              <div formArrayName="carga_academica" *ngFor="let carga of carga_academica.controls; let i = index">
-                <div [formGroupName]="i">
-                  <br>
-                  <div class="form-group row">
-                    <nb-card>
-                      <nb-card-body>
-
-                        <nb-card>
-                          <nb-card-header>
-                            <label class="col-md-1" [attr.for]="'nombre' + i">Curso</label>
-                          </nb-card-header>
-                          <nb-card-body>
-                            <input type="text" [attr.id]="'nombre' + i" class="form-control" formControlName="c_nombre"
-                              placeholder="Nombre del Curso">
-                          </nb-card-body>
-                        </nb-card>
-
-                        <nb-card>
-                          <nb-card-header>
-                            <label class="col-md-1" [attr.for]="'codigo' + i">Codigo</label>
-                          </nb-card-header>
-                          <nb-card-body>
-                              <input type="text" [attr.id]="'codigo' + i" class="form-control"
-                                formControlName="c_codigo" placeholder="Codigo del Curso">
-                          </nb-card-body>
-                        </nb-card>
-                        <nb-card>
-
-                          <nb-card-header>
-                            <label class="col-md-1" [attr.for]="'grupo' + i">Grupo</label>
-                          </nb-card-header>
-                          <nb-card-body>
-                              <input type="number" [attr.id]="'grupo' + i" class="form-control"
-                                formControlName="c_grupo" placeholder="Grupo o Seccion">
-                          </nb-card-body>
-                        </nb-card>
-
-                        <nb-card>
-                          <nb-card-header>
-                            <label class="col-md-1" [attr.for]="'plan' + i">Plan</label>
-                          </nb-card-header>
-                          <nb-card-body>
-                              <input type="text" [attr.id]="'plan' + i" class="form-control" formControlName="c_plan"
-                                placeholder="Plan de Estudios">
-                          </nb-card-body>
-                        </nb-card>
-
-                        <div class="col-md-2">
-                          <button class="btn btn-dark" (click)="removerCarga(i)">Remover</button>
-                        </div>
-
-                      </nb-card-body>
-                    </nb-card>
-                  </div>
-                </div>
-              </div>
               <br>
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button class="btn btn-outline-success me-md-2" type="button"

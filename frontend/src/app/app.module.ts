@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 import {SifoCadAuthModule} from './auth/auth.module';
 import {PaginaModule} from './pagina/pagina.module';
 import { DocenteComponent } from './pagina/Registro/docente/docente.component';
+import { CursosComponent } from './pagina/cursos/cursos.component';
+
 const formSetting: any = {
   redirectDelay: 0,
   showMessage: {

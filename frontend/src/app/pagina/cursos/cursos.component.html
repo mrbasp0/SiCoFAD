@@ -1,0 +1,173 @@
+<nb-card>
+  <nb-card-body>
+
+    <nb-tabset>
+      <nb-tab tabTitle="CURSOS">
+        <div>
+          <h1>Registro de Datos</h1>
+          <form #cursoForm="ngForm" (ngSubmit)="addCurso(cursoForm)">
+            <div class="col-md-4">
+              <input type="hidden" name="_id" #_id='ngModel' [(ngModel)]="cursoService.selectedCurso._id">
+              <div class="row">
+                <input type="text" class="form-control" placeholder="Nombre de curso" aria-label="Nombre de curso"
+                  name="nombre" #name="ngModel" [(ngModel)]="cursoService.selectedCurso.nombre">
+              </div>
+              <br>
+              <div class="row">
+                <input type="text" class="form-control" placeholder="Codigo" aria-label="Codigo" name="codigo"
+                  #name="ngModel" [(ngModel)]="cursoService.selectedCurso.codigo">
+              </div>
+              <br>
+              <div class="row">
+                <input type="text" class="form-control" placeholder="Grupo" aria-label="Grupo" name="grupo"
+                  #name="ngModel" [(ngModel)]="cursoService.selectedCurso.grupo">
+              </div>
+              <br>
+              <div class="row">
+                <input type="text" class="form-control" placeholder="Plan de Estudios" aria-label="Plan de Estudios"
+                  name="plan" #name="ngModel" [(ngModel)]="cursoService.selectedCurso.plan">
+              </div>
+              <br>
+              <div>
+                <nb-card>
+                  <nb-card-body class="example-items-rows">
+                    <button nbButton status="success" style="margin-left: 5em;">Agregar Curso</button>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+
+            </div>
+            <div class="col-auto">
+              <table class="table">
+                <thead>
+                  <th>
+                    <h4>Codigo</h4>
+                  </th>
+                  <th>
+                    <h4>Curso</h4>
+                  </th>
+                  <th>
+                    <h4>Grupo</h4>
+                  </th>
+                  <th>
+                    <h4>Plan</h4>
+                  </th>
+                  <!-- <th>Acciones</th> -->
+                </thead>
+                <tbody>
+                  <tr *ngFor="let curso of cursoService.cursos">
+                    <td>{{ curso.codigo }}</td>
+                    <td>{{ curso.nombre }}</td>
+                    <td>{{ curso.grupo }}</td>
+                    <td>{{ curso.plan}}</td>
+                    <!-- <td>
+                          <a (click)="editCurso(curso)" class="btn">
+                            <nb-icon icon="edit-2-outline"></nb-icon>
+                          </a>
+                          <a (click)="deleteCurso(curso._id)" class="btn">
+                            <nb-icon icon="trash-2-outline"></nb-icon>
+                          </a>
+                        </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </form>
+        </div>
+      </nb-tab>
+      <nb-tab tabTitle="Acciones">
+        <div>
+          <h1>Actualizacion de Datos</h1>
+          <form #cursoForm="ngForm" (ngSubmit)="addCurso(cursoForm)">
+            <div class="col-md-4">
+              <input type="hidden" name="_id" #_id='ngModel' [(ngModel)]="cursoService.selectedCurso._id">
+              <div class="row">
+                <input type="text" class="form-control" placeholder="Nombre de curso" aria-label="Nombre de curso"
+                  name="nombre" #name="ngModel" [(ngModel)]="cursoService.selectedCurso.nombre">
+              </div>
+              <br>
+              <div class="row">
+                <input type="text" class="form-control" placeholder="Codigo" aria-label="Codigo" name="codigo"
+                  #name="ngModel" [(ngModel)]="cursoService.selectedCurso.codigo">
+              </div>
+              <br>
+              <div class="row">
+                <input type="text" class="form-control" placeholder="Grupo" aria-label="Grupo" name="grupo"
+                  #name="ngModel" [(ngModel)]="cursoService.selectedCurso.grupo">
+              </div>
+              <br>
+              <div class="row">
+                <input type="text" class="form-control" placeholder="Plan de Estudios" aria-label="Plan de Estudios"
+                  name="plan" #name="ngModel" [(ngModel)]="cursoService.selectedCurso.plan">
+              </div>
+              <br>
+              <div>
+                <nb-card>
+                  <nb-card-body class="example-items-rows">
+                    <button nbButton status="success" style="margin-left: 7em;">Confirmar</button>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+
+            </div>
+            <div class="col-auto">
+              <table class="table" style="text-align: center;">
+                <thead>
+                  <th>
+                    <h4>Codigo</h4>
+                  </th>
+                  <th>
+                    <h4>Curso</h4>
+                  </th>
+                  <th>
+                    <h4>Grupo</h4>
+                  </th>
+                  <th>
+                    <h4>Plan</h4>
+                  </th>
+                  <th>
+                    <h4>Acciones</h4>
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let curso of cursoService.cursos">
+                    <td>{{ curso.codigo }}</td>
+                    <td>{{ curso.nombre }}</td>
+                    <td>{{ curso.grupo }}</td>
+                    <td>{{ curso.plan}}</td>
+                    <td>
+                      <a (click)="editCurso(curso)" class="btn">
+                        <nb-icon icon="edit-2-outline"></nb-icon>
+                      </a>
+                      <a (click)="deleteCurso(curso._id)" class="btn">
+                        <nb-icon icon="trash-2-outline"></nb-icon>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </form>
+        </div>
+      </nb-tab>
+      <nb-tab tabTitle="Busquedas">
+        <h1>Buscar</h1>
+        <div _ngcontent-c3="" class="search"><i _ngcontent-c3=""><svg xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" viewBox="0 0 24 24" class="eva eva-search-outline" fill="inherit">
+              <g data-name="Layer 2">
+                <g data-name="search">
+                  <rect width="24" height="24" opacity="0"></rect>
+                  <path
+                    d="M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z">
+                  </path>
+                </g>
+              </g>
+            </svg></i><input _ngcontent-c3="" autocomplete="off" class="search-input" tabindex="-1"
+            placeholder="Buscar Cursos"></div>
+      </nb-tab>
+    </nb-tabset>
+
+  </nb-card-body>
+</nb-card>
