@@ -24,6 +24,7 @@ app.use('/usuario',require('./routes/usuario.routes'));
 app.use('/formato/1',require('./routes/formato_1.routes'));
 app.use('/formato/2',require('./routes/formato_2.routes'));
 app.use('/formato/5',require('./routes/formato_5.routes'));
+app.use('/constancia',require('./routes/constancia.routes'));
 
 //Starting the server
 app.listen(app.get('port'), ()=> {

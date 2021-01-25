@@ -9,7 +9,7 @@ export class SilabosService {
 
   selectedFormato1: Formato_1;
   formatos: Formato_1[];
-  readonly URL_API = 'http://localhost:3000/fomato/1';
+  readonly URL_API = 'http://localhost:3000/formato/1';
 
   constructor(private http: HttpClient) {
     this.selectedFormato1 = new Formato_1();
@@ -17,8 +17,7 @@ export class SilabosService {
 
   postFormato_1(formato_1: Formato_1) {
     return this.http.post(this.URL_API, formato_1);
-  }
-  
+  }  
 
   getFormatos_1() {
     return this.http.get(this.URL_API);

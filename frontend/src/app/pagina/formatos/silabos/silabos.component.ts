@@ -20,11 +20,14 @@ export class SilabosComponent implements OnInit {
     this.getFormatos_1();
   }
 
+  fechaact = new Date();
+
   registroForm = this.formBuilder.group({
     cod_curso: '',
     num_grupo: null,
     nom_curso: '',
     nom_docente: '',
+    fecha: this.fechaact,
     alumnos: this.formBuilder.array([])
   })
 
@@ -41,6 +44,10 @@ export class SilabosComponent implements OnInit {
 
   get nom_docente() {
     return this.registroForm.get('nom_docente')
+  }
+
+  get fecha() {
+    return this.fechaact
   }
 
   get alumnos() {

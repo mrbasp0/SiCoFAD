@@ -32,12 +32,7 @@ docenteCtrl.editDocente = async (req, res) => {
     const ndocent = {        
         codigo: req.body.codigo,
         nombre: req.body.nombre,
-        carga_academica: [{
-            c_nombre: req.body.c_nombre,
-            c_codigo: req.body.c_codigo,
-            c_grupo: req.body.c_grupo,
-            c_plan: req.body.c_plan}
-        ]
+        carga_academica: req.body.carga_academica
     };
     
     await docente.findByIdAndUpdate(id, {$set: ndocent}, {new: true});
