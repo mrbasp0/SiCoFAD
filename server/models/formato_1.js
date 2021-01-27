@@ -8,7 +8,7 @@ const AlumnoSchema = new Schema({
 }, { _id : false });
 
 const Form1Schema = new Schema({
-    cod_curso: { type: String, required: true },
+    cod_curso: { type: Number, required: true },
     num_grupo: { type: Number, required: true },
     nom_curso: { type: String, required: true },    
     nom_docente: { type: String, required: true },

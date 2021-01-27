@@ -1,17 +1,291 @@
 <nb-card>
   <nb-card-body>
+    <nb-tabset fullWidth="true" (changeTab)="changeTab()">
+      <nb-tab tabTitle="Formatos 2" tabIcon="person-outline" badgeStatus="info" badgePosition="top right" badgeDot="nuevoFormato" responsive>
+        <div>
+          <ng2-smart-table [settings]="settings" [source]="source">
+            <nb-card [hidden]="formato2" [nbSpinner]="true" nbSpinnerStatus="success" nbSpinnerSize="giant">
+              <nb-card-body>Cargando...</nb-card-body>
+            </nb-card>
+          </ng2-smart-table>
+        </div>
+      </nb-tab>
+      <nb-tab tabTitle="Formato" tabIcon="file-text-outline" active responsive>
+        <form (ngSubmit)="onSubmit()" [formGroup]="Formato2Form">
+          <nb-card>
+            <nb-card-header>Datos del Curso</nb-card-header>
+            <nb-card-body class="row">
+              <div class="col-12 col-sm-6">
+                <div class="form-control-group">
+                  <label for="codigoCurso" class="mr-3 label col-12">Código</label>
+                  <input nbInput autofocus medium type="number" name="codigoCurso" id="codigoCurso"
+                    placeholder="Codigo del curso" formControlName="codigoCurso"
+                    [status]="codigoCurso.dirty ? (codigoCurso.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="codigoCurso.invalid && codigoCurso.touched ? true : null">
+                </div>
+                <ng-container *ngIf="codigoCurso.invalid && codigoCurso.touched">
+                  <p class="caption status-danger" *ngIf="codigoCurso.errors?.required">
+                    El código es necesario
+                  </p>
+                  <p class="caption status-danger" *ngIf="codigoCurso.errors?.pattern">
+                    Es un código de 7 digitos
+                  </p>
+                </ng-container>
 
-    <nb-tabset>
-      <nb-tab tabTitle="Delegados" tabIcon="person-outline" responsive>
-        <p>Lista de <strong>delegados</strong>.</p>
-      </nb-tab>
-      <nb-tab tabTitle="Nuevo" tabIcon="person-add-outline" responsive>
-        
-      </nb-tab>
-      <nb-tab tabTitle="SubDelegados" tabIcon="email-outline" responsive>
-        <p>Lista de <strong>subdelegados</strong>.</p>
+
+                <div class="form-control-group mt-3">
+                  <label for="nombreCurso" class="mr-2 label col-12">Nombre</label>
+                  <input type="text" nbInput medium id="nombreCurso" placeholder="Nombre del curso"
+                    formControlName="nombreCurso"
+                    [status]="nombreCurso.dirty ? (nombreCurso.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="nombreCurso.invalid && nombreCurso.touched ? true : null">
+                  <ng-container *ngIf="nombreCurso.invalid && nombreCurso.touched">
+                    <p class="caption status-danger" *ngIf="nombreCurso.errors?.required">
+                      El nombre es necesario
+                    </p>
+                    <p class="caption status-danger" *ngIf="nombreCurso.errors?.minlength">
+                      Es un nombre de 10 caracteres como mínimo
+                    </p>
+                  </ng-container>
+                </div>
+                <div class="form-control-group mt-3">
+                  <label for="nombreDocente" class="mr-2 label col-12">Docente</label>
+                  <input type="text" nbInput medium id="nombreDocente" placeholder="Nombre del Profesor"
+                    formControlName="nombreDocente"
+                    [status]="nombreDocente.dirty ? (nombreDocente.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="nombreDocente.invalid && nombreDocente.touched ? true : null">
+                  <ng-container *ngIf="nombreDocente.invalid && nombreDocente.touched">
+                    <p class="caption status-danger" *ngIf="nombreDocente.errors?.required">
+                      El nombre del docente es necesario
+                    </p>
+                    <p class="caption status-danger" *ngIf="nombreDocente.errors?.minlength">
+                      Es un nombre de 10 caracteres como mínimo
+                    </p>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6  mt-xs-3">
+                <div class="form-control-group ">
+                  <label for="grupo" class="mr-3 label col-12">Grupo</label>
+                  <input nbInput autofocus medium type="number" name="grupo" id="grupo" placeholder="Grupo del curso"
+                    formControlName="grupo" [status]="grupo.dirty ? (grupo.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="grupo.invalid && grupo.touched ? true : null">
+                </div>
+                <ng-container *ngIf="grupo.invalid && grupo.touched">
+                  <p class="caption status-danger" *ngIf="grupo.errors?.required">
+                    El grupo es necesario
+                  </p>
+                  <p class="caption status-danger" *ngIf="grupo.errors?.pattern">
+                    Debe estar entre 1 y 3
+                  </p>
+                </ng-container>
+
+                <div class="form-control-group mt-3">
+                  <label for="codigoDocente" class="mr-2 label col-12">Codigo</label>
+                  <input type="number" nbInput medium id="codigoDocente" placeholder="Codigo del profesor"
+                    formControlName="codigoDocente"
+                    [status]="codigoDocente.dirty ? (codigoDocente.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="codigoDocente.invalid && codigoDocente.touched ? true : null">
+                  <ng-container *ngIf="codigoDocente.invalid && codigoDocente.touched">
+                    <p class="caption status-danger" *ngIf="codigoDocente.errors?.required">
+                      El código del docente es necesario
+                    </p>
+                    <p class="caption status-danger" *ngIf="codigoDocente.errors?.pattern">
+                      Es un código de 8 dígitos como mínimo
+                    </p>
+                  </ng-container>
+                </div>
+
+              </div>
+
+            </nb-card-body>
+          </nb-card>
+          <nb-card>
+            <nb-card-header>Datos del Estudiante Delegado</nb-card-header>
+            <nb-card-body class="row">
+              <div class="col-12 col-sm-6">
+                <div class="form-control-group ">
+                  <label for="codigoDelegado" class="mr-3 label col-12">Código</label>
+                  <input nbInput autofocus medium type="number" name="codigoDelegado" id="codigoDelegado"
+                    placeholder="Codigo del Delegado" formControlName="codigoDelegado"
+                    [status]="codigoDelegado.dirty ? (codigoDelegado.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="codigoDelegado.invalid && codigoDelegado.touched ? true : null">
+                </div>
+                <ng-container *ngIf="codigoDelegado.invalid && codigoDelegado.touched">
+                  <p class="caption status-danger" *ngIf="codigoDelegado.errors?.required">
+                    El código es necesario
+                  </p>
+                  <p class="caption status-danger" *ngIf="codigoDelegado.errors?.pattern">
+                    Es un código de 8 digitos
+                  </p>
+                </ng-container>
+
+
+                <div class="form-control-group mt-3">
+                  <label for="nombreDelegado" class="mr-2 label col-12">Nombre Completo</label>
+                  <input type="text" nbInput medium id="nombreDelegado" placeholder="Nombre del delegado"
+                    formControlName="nombreDelegado"
+                    [status]="nombreDelegado.dirty ? (nombreDelegado.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="nombreDelegado.invalid && nombreDelegado.touched ? true : null">
+                  <ng-container *ngIf="nombreDelegado.invalid && nombreDelegado.touched">
+                    <p class="caption status-danger" *ngIf="nombreDelegado.errors?.required">
+                      El nombre es necesario
+                    </p>
+                    <p class="caption status-danger" *ngIf="nombreDelegado.errors?.minlength">
+                      Es un nombre de 10 caracteres como mínimo
+                    </p>
+                  </ng-container>
+                </div>
+                <div class="form-control-group mt-3">
+                  <label for="telefonoDelegado" class="mr-2 label col-12">Teléfono fijo</label>
+                  <input type="text" nbInput medium id="telefonoDelegado" placeholder="Teléfono fijo"
+                    formControlName="telefonoDelegado">
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="form-control-group">
+                  <label for="celularDelegado" class="mr-2 label col-12">Celular</label>
+                  <input type="text" nbInput medium id="celularDelegado" placeholder="Celular"
+                    formControlName="celularDelegado">
+                  <ng-container *ngIf="celularDelegado.invalid && celularDelegado.touched">
+                    <p class="caption status-danger" *ngIf="celularDelegado.errors?.required">
+                      El celular del subdelegado es necesario
+                    </p>
+                  </ng-container>
+                </div>
+
+                <div class="form-control-group mt-3">
+                  <label for="direccionDelegado" class="mr-3 label col-12">Dirección</label>
+                  <input nbInput autofocus medium type="text" name="direccionDelegado" id="direccionDelegado"
+                    placeholder="Dirección del delegado" formControlName="direccionDelegado">
+                </div>
+
+                <div class="form-control-group mt-3">
+                  <label for="emailDelegado" class="mr-2 label col-12">Email</label>
+                  <input type="email" nbInput medium id="emailDelegado" placeholder="Email del delegado"
+                    formControlName="emailDelegado"
+                    [status]="emailDelegado.dirty ? (emailDelegado.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="emailDelegado.invalid && emailDelegado.touched ? true : null">
+                  <ng-container *ngIf="emailDelegado.invalid && emailDelegado.touched">
+                    <p class="caption status-danger" *ngIf="emailDelegado.errors?.required">
+                      El email del delegado es necesario
+                    </p>
+                    <p class="caption status-danger" *ngIf="emailDelegado.errors?.email">
+                      Debe ser un email válido
+                    </p>
+                  </ng-container>
+                </div>
+
+              </div>
+
+            </nb-card-body>
+          </nb-card>
+          <nb-card>
+            <nb-card-header>Datos del Estudiante Sub-Delegado</nb-card-header>
+            <nb-card-body class="row">
+              <div class="col-12 col-sm-6">
+                <div class="form-control-group ">
+                  <label for="codigoSubDelegado" class="mr-3 label col-12">Código</label>
+                  <input nbInput autofocus medium type="number" name="codigoSubDelegado" id="codigoSubDelegado"
+                    placeholder="Codigo del Sub-Delegado" formControlName="codigoSubDelegado"
+                    [status]="codigoSubDelegado.dirty ? (codigoSubDelegado.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="codigoSubDelegado.invalid && codigoSubDelegado.touched ? true : null">
+                </div>
+                <ng-container *ngIf="codigoSubDelegado.invalid && codigoSubDelegado.touched">
+                  <p class="caption status-danger" *ngIf="codigoSubDelegado.errors?.required">
+                    El código es necesario
+                  </p>
+                  <p class="caption status-danger" *ngIf="codigoSubDelegado.errors?.pattern">
+                    Es un código de 8 digitos
+                  </p>
+                </ng-container>
+
+
+                <div class="form-control-group mt-3">
+                  <label for="nombreSubDelegado" class="mr-2 label col-12">Nombre Completo</label>
+                  <input type="text" nbInput medium id="nombreSubDelegado" placeholder="Nombre del Sub-delegado"
+                    formControlName="nombreSubDelegado"
+                    [status]="nombreSubDelegado.dirty ? (nombreSubDelegado.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="nombreSubDelegado.invalid && nombreSubDelegado.touched ? true : null">
+                  <ng-container *ngIf="nombreSubDelegado.invalid && nombreSubDelegado.touched">
+                    <p class="caption status-danger" *ngIf="nombreSubDelegado.errors?.required">
+                      El nombre es necesario
+                    </p>
+                    <p class="caption status-danger" *ngIf="nombreSubDelegado.errors?.minlength">
+                      Es un nombre de 10 caracteres como mínimo
+                    </p>
+                  </ng-container>
+                </div>
+                <div class="form-control-group mt-3">
+                  <label for="telefonoSubDelegado" class="mr-2 label col-12">Teléfono fijo</label>
+                  <input type="text" nbInput medium id="telefonoSubDelegado" placeholder="Teléfono fijo"
+                    formControlName="telefonoSubDelegado">
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <div class="form-control-group">
+                  <label for="celularSubDelegado" class="mr-2 label col-12">Celular</label>
+                  <input type="text" nbInput medium id="celularSubDelegado" placeholder="Celular"
+                    formControlName="celularSubDelegado">
+                  <ng-container *ngIf="celularSubDelegado.invalid && celularSubDelegado.touched">
+                    <p class="caption status-danger" *ngIf="celularSubDelegado.errors?.required">
+                      El celular del subdelegado es necesario
+                    </p>
+                  </ng-container>
+                </div>
+
+                <div class="form-control-group mt-3">
+                  <label for="direccionSubDelegado" class="mr-3 label col-12">Dirección</label>
+                  <input nbInput autofocus medium type="text" name="direccionSubDelegado" id="direccionSubDelegado"
+                    placeholder="Dirección del Sub-delegado" formControlName="direccionSubDelegado">
+                </div>
+
+                <div class="form-control-group mt-3">
+                  <label for="emailSubDelegado" class="mr-2 label col-12">Email</label>
+                  <input type="email" nbInput medium id="emailSubDelegado" placeholder="Email del Sub-delegado"
+                    formControlName="emailSubDelegado"
+                    [status]="emailSubDelegado.dirty ? (emailSubDelegado.invalid  ? 'danger' : 'success') : 'basic'"
+                    [attr.aria-invalid]="emailSubDelegado.invalid && emailSubDelegado.touched ? true : null">
+                  <ng-container *ngIf="emailSubDelegado.invalid && emailSubDelegado.touched">
+                    <p class="caption status-danger" *ngIf="emailSubDelegado.errors?.required">
+                      El email del delegado es necesario
+                    </p>
+                    <p class="caption status-danger" *ngIf="emailSubDelegado.errors?.email">
+                      Debe ser un email válido
+                    </p>
+                  </ng-container>
+                </div>
+
+              </div>
+            </nb-card-body>
+          </nb-card>
+          <nb-card>
+            <nb-card-body>
+              <div class="row justify-content-end">
+                <div class="col-12 col-sm-4">
+                  <label class="label">Fecha:</label>
+                  <br>
+                  <p>C.U {{fechaActual | date:"dd 'de' MM 'del' yyyy"}}</p>
+                </div>
+                <div class="col-12 col-sm-3">
+                  <img src="../../../../assets/imgs/sello.png"
+                    alt="sello de la Universidad Nacional Mayor de San Marcos">
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+          <nb-card>
+            <nb-card-body>
+              <button nbButton status="primary" size="medium" type="submit" [disabled]="!Formato2Form.valid">
+                Guardar
+              </button>
+            </nb-card-body>
+          </nb-card>
+        </form>
       </nb-tab>
     </nb-tabset>
-
   </nb-card-body>
 </nb-card>

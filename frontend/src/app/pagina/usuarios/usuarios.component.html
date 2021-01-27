@@ -1,0 +1,80 @@
+<nb-card>
+    <nb-card-body>
+        <nb-tabset fullWidth (changeTab)="changeTab()">
+            <nb-tab tabTitle="Usuarios" tabIcon="people-outline" responsive>
+                <div>
+                    <ng2-smart-table [settings]="settings" [source]="source">
+                        <nb-card [hidden]="usuarios" [nbSpinner]="true" nbSpinnerStatus="success"
+                            nbSpinnerSize="giant">
+                            <nb-card-body>Cargando...</nb-card-body>
+                        </nb-card>
+                    </ng2-smart-table>
+                </div>
+            </nb-tab>
+            <nb-tab tabTitle="Usuario" tabIcon="person-add-outline" responsive>
+                <form (ngSubmit)="onSubmit()" [formGroup]="UsuarioForm">
+                    <nb-card>
+                        <nb-card-header>Usuario</nb-card-header>
+                        <nb-card-body>
+                            <div class="form-control-group">
+                                <label for="usuario" class="label col-12">Usuario:</label>
+                                <input type="email" nbInput medium id="usuario" name="usuario" formControlName="usuario"
+                                    placeholder="Nuevo usuario"
+                                    [status]="usuario.dirty ? (usuario.invalid ? 'danger' : 'success') : 'basic'"
+                                    [attr.aria-invalid]="usuario.invalid && usuario.touched ? true : null"
+                                    autofocus="true">
+                                <ng-container *ngIf="usuario.invalid && usuario.touched">
+                                    <p class="caption status-danger" *ngIf="usuario.errors?.required">
+                                        El usuario es necesario
+                                    </p>
+                                    <p class="caption status-danger" *ngIf="usuario.errors?.email">
+                                        debe ser un email
+                                    </p>
+                                </ng-container>
+                            </div>
+                            <div class="form-control-group">
+                                <label for="password" class="label col-12">Contraseña:</label>
+                                <input type="password" nbInput medium id="password" name="password"
+                                    formControlName="password" placeholder="Contraseña"
+                                    [status]="password.dirty ? (password.invalid ? 'danger' : 'success') : 'basic'"
+                                    [attr.aria-invalid]="password.invalid && password.touched ? true : null"
+                                    >
+                                <ng-container *ngIf="password.invalid && password.touched">
+                                    <p class="caption status-danger" *ngIf="password.errors?.required">
+                                        La contraseña es necesaria
+                                    </p>
+                                </ng-container>
+                            </div>
+                            <div class="form-control-group">
+                                <label for="rol" class="label col-12">Rol: </label>
+                                <nb-select placeholder="Rol" [formControl]="rol">
+                                    <nb-option value="1"> Profesor</nb-option>
+                                    <nb-option value="2"> Secretaria</nb-option>
+                                    <nb-option value="3"> Director</nb-option>
+                                    <nb-option value="4"> Otro</nb-option>
+                                  </nb-select>
+                                <ng-container *ngIf="rol.invalid && rol.touched">
+                                    <p class="caption status-danger" *ngIf="rol.errors?.required">
+                                        La Rol es necesario
+                                    </p>
+                                </ng-container>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card>
+                        <nb-card-body>
+                            <div class="row justify-content-around">
+                                <div class="col-12">
+                                    <button nbButton status="primary" size="medium" type="submit"
+                                        [disabled]="!UsuarioForm.valid">
+                                        Registrar
+                                    </button>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </form>
+            </nb-tab>
+        </nb-tabset>
+    </nb-card-body>
+</nb-card>

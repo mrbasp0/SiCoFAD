@@ -1,42 +1,27 @@
-button[nbTreeGridRowToggle] {
-    background: transparent;
-    border: none;
-    padding: 0;
+@import '../../../temas/themes.scss';
+
+
+@include nb-install-component() {
+  nb-card {
+    transform: translate3d(0, 0, 0);
   }
-  
-  .search-label {
-    display: block;
-  }
-  .search-input {
-    margin-bottom: 1rem;
-  }
-  
-  .nb-column-name {
-    width: 100%;
-  }
-  
-  @media screen and (min-width: 400px) {
-    .nb-column-name,
-    .nb-column-size {
-      width: 50%;
-    }
-  }
-  
-  @media screen and (min-width: 500px) {
-    .nb-column-name,
-    .nb-column-size,
-    .nb-column-kind {
-      width: 33.333%;
-    }
-  }
-  
-  @media screen and (min-width: 600px) {
-    .nb-column-name {
-      width: 31%;
-    }
-    .nb-column-size,
-    .nb-column-kind,
-    .nb-column-items {
-      width: 23%;
-    }
-  }
+
+}
+
+:host nb-tab {
+  padding: 1.25rem;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

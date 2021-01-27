@@ -1,0 +1,515 @@
+<nb-card>
+    <nb-card-body>
+        <nb-tabset fullWidth (changeTab)="changeTab()">
+            <nb-tab tabTitle="Informes" tabIcon="folder-outline" responsive>
+                <div>
+                    <ng2-smart-table [settings]="settings" [source]="source">
+                    </ng2-smart-table>
+                </div>
+            </nb-tab>
+
+            <nb-tab tabTitle="Informe" tabIcon="file-text-outline" active responsive>
+                <!-- <p>{{Formato5Form.value | json }} {{Formato5Form.status | json }}</p>-->
+                <form (ngSubmit)="onSubmit()" [formGroup]="Formato5Form">
+                    <nb-card>
+                        <nb-card-header>Informe Final Del Curso</nb-card-header>
+                        <nb-card-body>
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-control-group mt-3">
+                                        <label for="codigoCurso" class="label col-12">Código de Asignatura</label>
+                                        <input nbInput autofocus medium type="number" name="codigoCurso"
+                                            id="codigoCurso" placeholder="Codigo del curso"
+                                            formControlName="codigoCurso"
+                                            [status]="codigoCurso.dirty ? (codigoCurso.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="codigoCurso.invalid && codigoCurso.touched ? true : null">
+                                        <ng-container *ngIf="codigoCurso.invalid && codigoCurso.touched">
+                                            <p class="caption status-danger" *ngIf="codigoCurso.errors?.required">
+                                                El código es necesario
+                                            </p>
+                                            <p class="caption status-danger" *ngIf="codigoCurso.errors?.pattern">
+                                                Es un código de 7 digitos
+                                            </p>
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="form-control-group mt-3">
+                                        <label for="nombreCurso" class="label col-12">Nombre de la
+                                            Asignatura</label>
+                                        <input type="text" nbInput medium id="nombreCurso"
+                                            placeholder="Nombre del curso" formControlName="nombreCurso"
+                                            [status]="nombreCurso.dirty ? (nombreCurso.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="nombreCurso.invalid && nombreCurso.touched ? true : null">
+                                        <ng-container *ngIf="nombreCurso.invalid && nombreCurso.touched">
+                                            <p class="caption status-danger" *ngIf="nombreCurso.errors?.required">
+                                                El nombre es necesario
+                                            </p>
+                                            <p class="caption status-danger" *ngIf="nombreCurso.errors?.minlength">
+                                                Es un nombre de 10 caracteres como mínimo
+                                            </p>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-control-group mt-3">
+                                        <label for="grupo" class="label col-12">Grupo</label>
+                                        <input nbInput autofocus medium type="number" name="grupo" id="grupo"
+                                            placeholder="Grupo del curso" formControlName="grupo"
+                                            [status]="grupo.dirty ? (grupo.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="grupo.invalid && grupo.touched ? true : null">
+                                        <ng-container *ngIf="grupo.invalid && grupo.touched">
+                                            <p class="caption status-danger" *ngIf="grupo.errors?.required">
+                                                El grupo es necesario
+                                            </p>
+                                            <p class="caption status-danger" *ngIf="grupo.errors?.pattern">
+                                                Grupo entre [1-3]
+                                            </p>
+                                        </ng-container>
+                                    </div>
+
+
+                                    <div class="form-control-group mt-3">
+                                        <label for="tipo" class="label col-12">Tipo (Marcar recuadro)</label>
+                                        <nb-select multiple placeholder="Tipo" [formControl]="tipo">
+                                            <nb-option value="Teoria">Teoría</nb-option>
+                                            <nb-option value="Practica">Práctica</nb-option>
+                                            <nb-option value="Laboratorio">Laboratorio</nb-option>
+                                        </nb-select>
+                                        <ng-container *ngIf="tipo.invalid && tipo.touched">
+                                            <p class="caption status-danger" *ngIf="tipo.errors?.required">
+                                                El tipo es necesario
+                                            </p>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </nb-card-body>
+                    </nb-card>
+
+                    <nb-card>
+                        <nb-card-body>
+                            <div class="row justify-content-around">
+                                <div class="form-control-group col-12 col-sm-4 mt-3">
+                                    <label for="nombreDocente" class="mr-2 label col-12">Docente</label>
+                                    <input type="text" nbInput medium id="nombreDocente"
+                                        placeholder="Nombre del Profesor" formControlName="nombreDocente"
+                                        [status]="nombreDocente.dirty ? (nombreDocente.invalid  ? 'danger' : 'success') : 'basic'"
+                                        [attr.aria-invalid]="nombreDocente.invalid && nombreDocente.touched ? true : null">
+                                    <ng-container *ngIf="nombreDocente.invalid && nombreDocente.touched">
+                                        <p class="caption status-danger" *ngIf="nombreDocente.errors?.required">
+                                            El nombre del docente es necesario
+                                        </p>
+                                        <p class="caption status-danger" *ngIf="nombreDocente.errors?.minlength">
+                                            Es un nombre de 10 caracteres como mínimo
+                                        </p>
+                                    </ng-container>
+                                </div>
+
+
+                                <div class="form-control-group  col-12 col-sm-4 mt-3">
+                                    <label for="emailDocente" class="mr-2 label col-12">Email-UNMSM</label>
+                                    <input type="email" nbInput medium id="emailDocente"
+                                        placeholder="Email del profesor" formControlName="emailDocente"
+                                        [status]="emailDocente.dirty ? (emailDocente.invalid  ? 'danger' : 'success') : 'basic'"
+                                        [attr.aria-invalid]="emailDocente.invalid && emailDocente.touched ? true : null">
+                                    <ng-container *ngIf="emailDocente.invalid && emailDocente.touched">
+                                        <p class="caption status-danger" *ngIf="emailDocente.errors?.required">
+                                            El email del docente es necesario
+                                        </p>
+                                        <p class="caption status-danger" *ngIf="emailDocente.errors?.email">
+                                            Debe ser un email
+                                        </p>
+                                    </ng-container>
+                                </div>
+
+                                <div class="form-control-group  col-12 col-sm-4 mt-3">
+                                    <label for="numeroDocente" class="mr-2 label col-12">télefono/celular</label>
+                                    <input type="number" nbInput medium id="numeroDocente"
+                                        placeholder="numero del profesor" formControlName="numeroDocente"
+                                        [status]="numeroDocente.dirty ? (numeroDocente.invalid  ? 'danger' : 'success') : 'basic'"
+                                        [attr.aria-invalid]="numeroDocente.invalid && numeroDocente.touched ? true : null">
+                                    <ng-container *ngIf="numeroDocente.invalid && numeroDocente.touched">
+                                        <p class="caption status-danger" *ngIf="numeroDocente.errors?.pattern">
+                                            Debe ser un numero de telf./cel. válido
+                                        </p>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+
+                    <nb-card>
+                        <nb-card-header>
+                            Del curso
+                        </nb-card-header>
+
+                        <nb-card-body>
+                            <div class="row justify-content-around">
+                                <div class="form-control-group col-12 col-sm-6">
+                                    <label for="porcentajeSilabo" class="label col-12">Porcentaje de cumplimiento del
+                                        sílabo: </label>
+                                    <input type="number" nbInput medium id="porcentajeSilabo"
+                                        placeholder="Porcentaje del silabo" formControlName="porcentajeSilabo"
+                                        [status]="porcentajeSilabo.dirty ? (porcentajeSilabo.invalid  ? 'danger' : 'success') : 'basic'"
+                                        [attr.aria-invalid]="porcentajeSilabo.invalid && porcentajeSilabo.touched ? true : null">
+
+                                    <ng-container *ngIf="porcentajeSilabo.invalid && porcentajeSilabo.touched">
+                                        <p class="caption status-danger" *ngIf="porcentajeSilabo.errors?.required">
+                                            El porcentaje del sílabo es necesario
+                                        </p>
+                                        <p class="caption status-danger" *ngIf="porcentajeSilabo.errors?.pattern">
+                                            Debe ser un valor entre 1 y 100
+                                        </p>
+                                    </ng-container>
+                                </div>
+
+                                <div class="form-control-group col-12 col-sm-6">
+                                    <nb-progress-bar [value]="porcentajeSilabo.value" [status]="status"
+                                        [displayValue]="true" size="giant"></nb-progress-bar>
+                                </div>
+
+                            </div>
+
+                            <div class="row mt-3 ">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-control-group">
+                                        <label for="practicas" class="label col-12">Prácticas calificadas: </label>
+                                        <input type="number" nbInput medium id="practicas"
+                                            placeholder="Número de prácticas" formControlName="practicas"
+                                            [status]="practicas.dirty ? (practicas.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="practicas.invalid && practicas.touched ? true : null">
+
+                                        <ng-container *ngIf="practicas.invalid && practicas.touched">
+                                            <p class="caption status-danger" *ngIf="practicas.errors?.required">
+                                                El número de prácticas es necesario
+                                            </p>
+                                            <p class="caption status-danger" *ngIf="practicas.errors?.pattern">
+                                                Debe ser un valor entre 0 y 4
+                                            </p>
+                                        </ng-container>
+                                    </div>
+
+
+                                    <div class="form-control-group mt-3">
+                                        <label for="experienciasLaboratorio" class="label col-12">Experiencias de
+                                            laboratorio: </label>
+                                        <input type="number" nbInput medium id="experienciasLaboratorio"
+                                            placeholder="Laboratorios realizados"
+                                            formControlName="experienciasLaboratorio"
+                                            [status]="experienciasLaboratorio.dirty ? (experienciasLaboratorio.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="experienciasLaboratorio.invalid && experienciasLaboratorio.touched ? true : null">
+
+                                        <ng-container
+                                            *ngIf="experienciasLaboratorio.invalid && experienciasLaboratorio.touched">
+                                            <p class="caption status-danger"
+                                                *ngIf="experienciasLaboratorio.errors?.required">
+                                                El número de experiencias de laboratorio es necesario
+                                            </p>
+                                            <p class="caption status-danger"
+                                                *ngIf="experienciasLaboratorio.errors?.pattern">
+                                                Debe ser un valor entre 0 y 4
+                                            </p>
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="form-control-group mt-3">
+                                        <label for="proyectosInvestigacion" class="label col-12">Proyectos y trabajos de
+                                            investigación: </label>
+                                        <input type="number" nbInput medium id="proyectosInvestigacion"
+                                            placeholder="Investigaciones realizadas"
+                                            formControlName="proyectosInvestigacion"
+                                            [status]="proyectosInvestigacion.dirty ? (proyectosInvestigacion.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="proyectosInvestigacion.invalid && proyectosInvestigacion.touched ? true : null">
+
+                                        <ng-container
+                                            *ngIf="proyectosInvestigacion.invalid && proyectosInvestigacion.touched">
+                                            <p class="caption status-danger"
+                                                *ngIf="proyectosInvestigacion.errors?.required">
+                                                El número de proyectos y trabajos de investigación es necesario
+                                            </p>
+                                            <p class="caption status-danger"
+                                                *ngIf="proyectosInvestigacion.errors?.pattern">
+                                                Debe ser un valor entre 0 y 2
+                                            </p>
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="form-control-group mt-3">
+                                        <label for="matriculados" class="label col-12">Alumnos matriculados: </label>
+                                        <input type="number" nbInput medium id="matriculados" placeholder="matriculados"
+                                            formControlName="matriculados"
+                                            [status]="matriculados.dirty ? (matriculados.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="matriculados.invalid && matriculados.touched ? true : null">
+
+                                        <ng-container *ngIf="matriculados.invalid && matriculados.touched">
+                                            <p class="caption status-danger" *ngIf="matriculados.errors?.required">
+                                                El número alumnos matriculados es necesario
+                                            </p>
+                                            <p class="caption status-danger" *ngIf="matriculados.errors?.pattern">
+                                                Debe ser un valor entre 15 y 100
+                                            </p>
+                                        </ng-container>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="aprobados" class="label col-12">Alumnos Aprobados: </label>
+                                        <input type="number" nbInput medium id="aprobados" placeholder="aprobados"
+                                            formControlName="aprobados"
+                                            [status]="aprobados.dirty ? (aprobados.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="aprobados.invalid && aprobados.touched ? true : null">
+
+                                        <ng-container *ngIf="aprobados.invalid && aprobados.touched">
+                                            <p class="caption status-danger" *ngIf="aprobados.errors?.required">
+                                                El número alumnos aprobados es necesario
+                                            </p>
+                                            <p class="caption status-danger" *ngIf="aprobados.errors?.pattern">
+                                                Debe ser un valor entre 0 y 100
+                                            </p>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+
+                                    <div class="form-control-group">
+                                        <label for="desaprobados" class="label col-12">Alumnos Desaprobados: </label>
+                                        <input type="number" nbInput medium id="desaprobados" placeholder="desaprobados"
+                                            formControlName="desaprobados"
+                                            [status]="desaprobados.dirty ? (desaprobados.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="desaprobados.invalid && desaprobados.touched ? true : null">
+
+                                        <ng-container *ngIf="desaprobados.invalid && desaprobados.touched">
+                                            <p class="caption status-danger" *ngIf="desaprobados.errors?.required">
+                                                El número alumnos desaprobados es necesario
+                                            </p>
+                                            <p class="caption status-danger" *ngIf="desaprobados.errors?.pattern">
+                                                Debe ser un valor entre 1 y 9
+                                            </p>
+                                        </ng-container>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="ausentes" class="label col-12">Alumnos ausentes (NSP): </label>
+                                        <input type="number" nbInput medium id="ausentes"
+                                            placeholder="No se presentaron (NSP)" formControlName="ausentes"
+                                            [status]="ausentes.dirty ? (ausentes.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="ausentes.invalid && ausentes.touched ? true : null">
+
+                                        <ng-container *ngIf="ausentes.invalid && ausentes.touched">
+                                            <p class="caption status-danger" *ngIf="ausentes.errors?.required">
+                                                0 si todos se presentaron
+                                            </p>
+                                        </ng-container>
+                                    </div>
+
+                                    <div class="form-control-group mt-3">
+                                        <label for="notaAlta" class="label col-12">Nota final más alta: </label>
+                                        <input type="number" nbInput medium id="notaAlta" placeholder="Nota más alta"
+                                            formControlName="notaAlta"
+                                            [status]="notaAlta.dirty ? (notaAlta.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="notaAlta.invalid && notaAlta.touched ? true : null">
+
+                                        <ng-container *ngIf="notaAlta.invalid && notaAlta.touched">
+                                            <p class="caption status-danger" *ngIf="notaAlta.errors?.required">
+                                                nota más alta requerida
+                                            </p>
+                                            <p class="caption status-danger"
+                                                *ngIf="notaAlta.errors?.max || notaAlta.errors?.min">
+                                                Debe ser un valor entre 0 y 20
+                                            </p>
+                                        </ng-container>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="notaBaja" class="label col-12">Nota final más baja: </label>
+                                        <input type="number" nbInput medium id="notaBaja" placeholder="Nota más baja"
+                                            formControlName="notaBaja"
+                                            [status]="notaBaja.dirty ? (notaBaja.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="notaBaja.invalid && notaBaja.touched ? true : null">
+
+                                        <ng-container *ngIf="notaBaja.invalid && notaBaja.touched">
+                                            <p class="caption status-danger" *ngIf="notaBaja.errors?.required">
+                                                nota más baja requerida
+                                            </p>
+                                            <p class="caption status-danger"
+                                                *ngIf="notaBaja.errors?.max || notaBaja.errors?.min">
+                                                Debe ser un valor entre 0 y 20
+                                            </p>
+                                        </ng-container>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="notaPromedio" class="label col-12">Nota final promedio: </label>
+                                        <input type="number" nbInput medium id="notaPromedio"
+                                            placeholder="Nota Promedio" formControlName="notaPromedio"
+                                            [status]="notaPromedio.dirty ? (notaPromedio.invalid  ? 'danger' : 'success') : 'basic'"
+                                            [attr.aria-invalid]="notaPromedio.invalid && notaPromedio.touched ? true : null"
+                                            [value]="promedio">
+
+                                        <ng-container *ngIf="notaPromedio.invalid && notaPromedio.touched">
+                                            <p class="caption status-danger" *ngIf="notaPromedio.errors?.required">
+                                                nota promedio requerido
+                                            </p>
+                                            <p class="caption status-danger"
+                                                *ngIf="notaPromedio.errors?.max || notaPromedio.errors?.min">
+                                                Debe ser un valor entre 0 y 20
+                                            </p>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </nb-card-body>
+                    </nb-card>
+
+                    <nb-card>
+                        <nb-card-header>
+                            Observaciones
+                        </nb-card-header>
+                        <nb-card-body>
+                            <div class="row">
+                                <div class="col-12 mt-3">
+                                    <div class="form-control-group">
+                                        <label for="nivelAcademico" class="label col-12">Nivel Académico de los alumnos:
+                                        </label>
+
+                                        <div class="row justify-content-around">
+                                            <div class="col-12 col-sm-6 mt-2">
+                                                <nb-radio-group id="nivelAcademico">
+                                                    <nb-radio value="Básico">Básico</nb-radio>
+                                                    <nb-radio value="Medio">Medio</nb-radio>
+                                                </nb-radio-group>
+                                            </div>
+                                            <div class="col-12 col-sm-6 mt-2">
+                                                <nb-radio-group id="nivelAcademico">
+                                                    <nb-radio value="Alto">Alto</nb-radio>
+                                                    <nb-radio value="Avanzado">Avanzado</nb-radio>
+                                                </nb-radio-group>
+                                            </div>
+                                        </div>
+                                        <textarea nbInput fullWidth class="mt-2" id="nivelAcademico"
+                                            formControlName="nivel"
+                                            placeholder="Comentario sobre el nivel Académico de los alumnos: incluya conocimientos previos, interés en el curso, estilos de aprendizaje."></textarea>
+                                            <ng-container *ngIf="nivel.invalid && nivel.touched">
+                                                <p class="caption status-danger" *ngIf="nivel.errors?.required">
+                                                    comentario sobre el nivel Académico requerido
+                                                </p>
+                                            </ng-container>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="asistencia" class="label col-12">Asistencia y puntualidad:
+                                        </label>
+                                            <textarea nbInput fullWidth id="asistencia" formControlName="asistencia"
+                                                placeholder="Comentario sobre la asistencia de los alumnos ."></textarea>
+                                        <ng-container *ngIf="asistencia.invalid && asistencia.touched">
+                                            <p class="caption status-danger" *ngIf="asistencia.errors?.required">
+                                                comentario sobre la asistencia requerida
+                                            </p>
+                                        </ng-container>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="silabo" class="label col-12">Del sílabo:
+                                        </label>
+                                        <textarea nbInput fullWidth id="silabo" formControlName="silabo"
+                                            placeholder="Qué temas del sílabo no se han completado? Considera todos los temas adecuados? Qué temas requieren más tiempo de dedicación?."></textarea>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="aulaVirtual" class="label col-12">Uso del Aula Virtual:
+                                        </label>
+                                        <textarea nbInput fullWidth id="aulaVirtual" formControlName="aulaVirtual"
+                                            placeholder="Información colocada, uso de foros, chat y cantidad de visitas estudiantiles.."></textarea>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="administrativas" class="label col-12">Administrativas:
+                                        </label>
+                                        <textarea nbInput fullWidth id="administrativas"
+                                            formControlName="administrativas"
+                                            placeholder="Disponibilidad de recursos (Plataformas virtuales)."></textarea>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="silaboCompetencias" class="label col-12">Sílabo por competencias:
+                                        </label>
+                                        <textarea nbInput fullWidth id="silaboCompetencias"
+                                            formControlName="silaboCompetencias"
+                                            placeholder="Qué actividades realizó usted para la evaluación del cumplimiento de las competencias de su curso, por los estudiantes? Podría presentar una propuesta de evaluación de las competencias de su curso?"></textarea>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="mejoraContinua" class="label col-12">Mejora continua:
+                                        </label>
+                                        <textarea nbInput fullWidth id="mejoraContinua" formControlName="mejoraContinua"
+                                            placeholder="Qué actividades de mejora continua ha realizado en el curso en este ciclo y cuáles propone para el siguiente, para mejorar el rendimiento académico del estudiante."></textarea>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="investigacionFormativa" class="label col-12">Investigación
+                                            formativa:
+                                        </label>
+                                        <textarea nbInput fullWidth id="investigacionFormativa"
+                                            formControlName="investigacionFormativa"
+                                            placeholder="Qué actividades de investigación formativa desarrolla con sus estudiantes"></textarea>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="actualizacionDocente" class="label col-12">Actualización docente:
+                                        </label>
+                                        <textarea nbInput fullWidth id="actualizacionDocente"
+                                            formControlName="actualizacionDocente"
+                                            placeholder="Ha seguido usted algún curso de actualización profesional o docente en los últimos dos años. Indique tema del curso y duración."></textarea>
+                                    </div>
+                                    <div class="form-control-group mt-3">
+                                        <label for="comentariosYrecomendaciones" class="label col-12">Comentarios y
+                                            recomendaciones:
+                                        </label>
+                                        <textarea nbInput fullWidth id="comentariosYrecomendaciones"
+                                            formControlName="comentariosYrecomendaciones"
+                                            placeholder="Serán útiles para mejorar el Plan de Estudios y los servicios que brinda la Escuela de Ingeniería de Sistemas y sobre el uso de las herramientas virtuales que proporciona la Facultad.."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card>
+                        <nb-card-header>
+                            Envio
+                        </nb-card-header>
+                        <nb-card-body>
+                            <address>
+                                Enviar este informe completo y firmado a la Dirección de Escuela de Ingeniería de
+                                Sistemas al siguiente correo:
+                                <a href="eapis.fisi@unmsm.edu.pe">eapis.fisi@unmsm.edu.pe</a>.<br>
+                                Ciudad Universitaria - Av. Germán Amézaga<br>
+                            </address>
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card>
+                        <nb-card-header>
+                            Firma
+                        </nb-card-header>
+                        <nb-card-body>
+                            <div class="row justify-content-around">
+                                <div class="col-12 col-sm-4">
+                                    <label class="label">Firma del profesor:</label>
+                                    <br>
+                                    <br>
+                                    <hr>
+
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <label class="label">Fecha:</label>
+                                    <br>
+                                    <p>{{fechaActual | date:'dd/MM/yyyy'}}</p>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <img src="../../../../assets/imgs/sello.png"
+                                        alt="sello de la Universidad Nacional Mayor de San Marcos">
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card>
+                        <nb-card-body>
+                            <button nbButton status="primary" size="medium" type="submit"
+                                [disabled]="!Formato5Form.valid">
+                                Guardar
+                            </button>
+                        </nb-card-body>
+                    </nb-card>
+                </form>
+            </nb-tab>
+        </nb-tabset>
+    </nb-card-body>
+</nb-card>

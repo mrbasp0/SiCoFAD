@@ -6,6 +6,9 @@ import { InicioComponent } from '../pagina/inicio/inicio.component';
 import { DelegadosComponent } from './formatos/delegados/delegados.component';
 import { SilabosComponent } from './formatos/silabos/silabos.component';
 import { CursosComponent } from './cursos/cursos.component';
+import { InformeFinDeCicloComponent } from './formatos/informe-fin-de-ciclo/informe-fin-de-ciclo.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { ConstanciaComponent } from './Registro/constancia/constancia.component';
 
 export const routes: Routes = [
   {
@@ -20,8 +23,21 @@ export const routes: Routes = [
             component: DelegadosComponent,
           },
           {
+            path: 'informes',
+            component: InformeFinDeCicloComponent,
+          },
+          {
             path: 'silabos',
             component: SilabosComponent,
+          }
+      ]
+      },
+      {
+        path: 'Reportes',
+        children: [
+          {
+            path: 'constancia',
+            component: ConstanciaComponent,
           }
       ]
       },

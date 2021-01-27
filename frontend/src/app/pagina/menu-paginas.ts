@@ -30,6 +30,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Reportes',
     icon: 'keypad-outline',
     link: '/Inicio/Reportes',
+    children: [
+      {
+        title:'constancia',
+        link:'/Inicio/Reportes/constancia'
+      }
+
+    ]
   },
   {
     title: 'Registros',

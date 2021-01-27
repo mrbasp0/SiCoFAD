@@ -20,6 +20,7 @@ export class SilabosComponent implements OnInit {
     this.getFormatos_1();
   }
 
+
   fechaact = new Date();
 
   registroForm = this.formBuilder.group({

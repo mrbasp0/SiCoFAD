@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const ConstanciaSchema = new Schema({
-    cod_curso: { type: String, required: true },
+    cod_curso: { type: Number, required: true },
     num_grupo: { type: Number, required: true },
     nom_curso: { type: String, required: true },    
     nom_docente: { type: String, required: true },

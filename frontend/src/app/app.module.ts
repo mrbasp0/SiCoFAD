@@ -7,13 +7,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbIconModule, NbMenuModule, NbSidebarModule, NbButtonModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbIconModule, NbMenuModule, NbSidebarModule, NbToastrModule, NbButtonModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
 import {SifoCadAuthModule} from './auth/auth.module';
 import {PaginaModule} from './pagina/pagina.module';
 import { DocenteComponent } from './pagina/Registro/docente/docente.component';
 import { CursosComponent } from './pagina/cursos/cursos.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { Ng2CompleterModule } from 'ng2-completer';
+import { ConstanciaComponent } from './pagina/Registro/constancia/constancia.component';
 
 const formSetting: any = {
   redirectDelay: 0,
@@ -41,8 +44,12 @@ const formSetting: any = {
     SifoCadAuthModule,
 
     PaginaModule,
+    Ng2SmartTableModule,
+    Ng2CompleterModule,
+    
     NbMenuModule.forRoot(),
     NbSidebarModule.forRoot(),
+    NbToastrModule.forRoot(),
     NbAuthModule.forRoot({
       strategies: [
         NbPasswordAuthStrategy.setup({

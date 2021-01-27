@@ -1,0 +1,94 @@
+<nb-card>
+    <nb-card-body>
+        <nb-tabset>
+            <nb-tab tabTitle="Constancias" tabIcon="clipboard-outline" responsive>
+                <nb-card>
+                    <nb-card-header>
+                        <h1>Constancias Registradas</h1>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <table class="table table-striped ">
+                            <thead>
+                                <th>
+                                    <h4>Codigo del Curso</h4>
+                                </th>
+                                <th>
+                                    <h4>Nombre del Curso</h4>
+                                </th>
+                                <th>
+                                    <h4>Grupo</h4>
+                                </th>
+                                <th>
+                                    <h4>Codigo Docente</h4>
+                                </th>
+                                <th>
+                                    <h4>Docente</h4>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let constancia of constanciaService.constancias">
+                                    <td>{{ constancia.cod_curso }}</td>
+                                    <td>{{ constancia.nom_curso }}</td>
+                                    <td>{{ constancia.num_grupo }}</td>
+                                    <td>{{ constancia.cod_docente }}</td>
+                                    <td>{{ constancia.nom_docente }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </nb-card-body>
+                </nb-card>
+            </nb-tab>
+
+            <nb-tab tabTitle="Generar Constancia" tabIcon="file-add-outline" responsive>
+                <nb-card>
+                    <nb-card-header>
+                        <h1>Generar Constancia</h1>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <form #constaciaForm ="ngForm">
+
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <input type="number" class="form-control" formControlName="cod_curso" nbInput
+                                        fullWidth placeholder="Codigo del Curso">
+                                    <br>
+                                    <input type="number" class="form-control" formControlName="num_grupo" nbInput
+                                        fullWidth placeholder="Grupo o Sección del Curso">
+                                </div>
+                                <br>
+                                <div class="form-group col-md-5">
+                                    <input type="text" class="form-control" formControlName="nom_curso" nbInput
+                                        fullWidth placeholder="Nombre del Curso">
+                                    <br>
+                                    <input type="text" class="form-control" formControlName="cod_docente" nbInput
+                                        fullWidth placeholder="Codigo del Docente">
+                                    <br>
+                                    <input type="text" class="form-control" formControlName="nom_docente" nbInput
+                                        fullWidth placeholder="Nombre del Docente">
+                                </div>
+                                <br>
+                                <nb-card>
+                                    <nb-card-header>Mensaje</nb-card-header>
+                                    <nb-card-body>
+                                        
+                                    </nb-card-body>
+                                </nb-card>
+                                <div class="form-group col-md-5">
+                                    <input type="text" class="form-control" formControlName="mensaje" nbInput
+                                        fullWidth placeholder="Mensaje" default="Felicitacioens pro culminar el curso con exito">
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button class="btn btn-outline-success me-md-2" type="button"
+                                    (click)="sub()">Enviar</button>
+                                <button class="btn btn-outline-warning" type="button"
+                                    (click)="sub()">Refrescar</button>
+                            </div>
+                        </form>
+                    </nb-card-body>
+                </nb-card>
+            </nb-tab>
+        </nb-tabset>
+
+    </nb-card-body>
+</nb-card>

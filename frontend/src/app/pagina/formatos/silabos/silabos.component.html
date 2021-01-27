@@ -2,7 +2,41 @@
     <nb-card-body>
         <nb-tabset>
             <nb-tab tabTitle="Formatos 1" tabIcon="clipboard-outline" responsive>
-                <p>Lista de <strong>delegados</strong>.</p>
+                <nb-card>
+                    <nb-card-header>
+                        <h1>Formatos Registrados</h1>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <table class="table table-striped ">
+                            <thead>
+                                <th>
+                                    <h4>Codigo del Curso</h4>
+                                </th>
+                                <th>
+                                    <h4>Nombre del Curso</h4>
+                                </th>
+                                <th>
+                                    <h4>Grupo</h4>
+                                </th>
+                                <th>
+                                    <h4>Docente</h4>
+                                </th>
+                                <th>
+                                    <h4>Fecha</h4>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let formato of silabosService.formatos">
+                                    <td>{{ formato.cod_curso }}</td>
+                                    <td>{{ formato.nom_curso }}</td>
+                                    <td>{{ formato.num_grupo }}</td>
+                                    <td>{{ formato.nom_docente }}</td>
+                                    <td>{{ formato.fecha }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </nb-card-body>
+                </nb-card>
             </nb-tab>
 
             <nb-tab tabTitle="Nuevo Formato 1" tabIcon="file-add-outline" responsive>
@@ -15,7 +49,7 @@
 
                             <div class="row">
                                 <div class="form-group col-md-5">
-                                    <input type="text" class="form-control" formControlName="cod_curso" nbInput
+                                    <input type="number" class="form-control" formControlName="cod_curso" nbInput
                                         fullWidth placeholder="Codigo del Curso">
                                     <br>
                                     <input type="number" class="form-control" formControlName="num_grupo" nbInput
